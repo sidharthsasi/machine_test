@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg p-4">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Edit Profile</h2>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <!-- Profile Picture Upload -->
+                        <div class="form-group text-center mb-3">
+                            <label for="profile_pic">Profile Picture</label><br>
+                            {% if profile.profile_pic %}
+                                <img src="{{ profile.profile_pic.url }}" alt="Profile Picture" class="rounded-circle mb-2" width="100" height="100">
+                            {% else %}
+                                <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Picture" class="rounded-circle mb-2" width="100" height="100">
+                            {% endif %}
+                            <input type="file" name="profile_pic" id="profile_pic" class="form-control mt-2">
+                        </div>
+
+                        <!-- Designation Field -->
+                        <div class="form-group mb-3">
+                            <label for="designation">Designation</label>
+                            <input type="text" name="designation" id="designation" class="form-control" value="{{ profile.designation }}">
+                        </div>
+
+                        <!-- Experience Field -->
+                        <div class="form-group mb-3">
+                            <label for="experience">Experience (Years)</label>
+                            <input type="number" name="experience" id="experience" class="form-control" value="{{ profile.experience }}">
+                        </div>
+
+                        <!-- Salary Field -->
+                        <div class="form-group mb-3">
+                            <label for="salary">Salary</label>
+                            <input type="number" name="salary" id="salary" class="form-control" value="{{ profile.salary }}">
+                        </div>
+
+                        <!-- Qualification Field -->
+                        <div class="form-group mb-3">
+                            <label for="qualification">Qualification</label>
+                            <input type="text" name="qualification" id="qualification" class="form-control" value="{{ profile.qualification }}">
+                        </div>
+
+                        <!-- Date of Birth Field -->
+                        <div class="form-group mb-3">
+                            <label for="date_of_birth">Date of Birth</label>
+                            <input type="date" name="date_of_birth" id="date_of_birth" class="form-control" value="{{ profile.date_of_birth }}">
+                        </div>
+
+                        <!-- Address Field -->
+                        <div class="form-group mb-3">
+                            <label for="address">Address</label>
+                            <textarea name="address" id="address" class="form-control">{{ profile.address }}</textarea>
+                        </div>
+
+                        <!-- Skills Field -->
+                        <div class="form-group mb-3">
+                            <label for="skills">Skills</label>
+                            <input type="text" name="skills" id="skills" class="form-control" value="{{ profile.skills }}">
+                        </div>
+
+                        <!-- Contact Number Field -->
+                        <div class="form-group mb-3">
+                            <label for="contact_number">Contact Number</label>
+                            <input type="text" name="contact_number" id="contact_number" class="form-control" value="{{ profile.contact_number }}">
+                        </div>
+
+                        <!-- Emergency Contact Field -->
+                        <div class="form-group mb-3">
+                            <label for="emergency_contact">Emergency Contact</label>
+                            <input type="text" name="emergency_contact" id="emergency_contact" class="form-control" value="{{ profile.emergency_contact }}">
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <a href="{% url 'profile' profile.id %}" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

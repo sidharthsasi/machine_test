@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg p-4">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Profile</h2>
+
+                    <div class="text-center mb-4">
+                        {% if user.user_profile.profile_pic %}
+                            <img src="{{ user.user_profile.profile_pic.url }}" alt="Profile Picture" class="rounded-circle" width="120" height="120">
+                        {% else %}
+                            <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Picture" class="rounded-circle" width="120" height="120">
+                        {% endif %}
+                    </div>
+
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th scope="row">First Name</th>
+                                <td>{{ user.first_name }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Last Name</th>
+                                <td>{{ user.last_name }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Email</th>
+                                <td>{{ user.email }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Phone Number</th>
+                                <td>{{ profile.contact_number }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Designation</th>
+                                <td>{{ profile.designation }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Experience</th>
+                                <td>{{ profile.experience }} years</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Salary</th>
+                                <td>${{ profile.salary }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Qualification</th>
+                                <td>{{ profile.qualification }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+
+                    <div class="text-center mt-4">
+                        <a href="{% url 'password_reset' %}" class="btn btn-secondary me-2">Change Password</a>
+                        <a href="{% url 'edit_profile' profile.id %}" class="btn btn-primary">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
