@@ -10,6 +10,7 @@ from accounts.models import *
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from rest_framework.permissions import IsAdminUser
+from django.core.validators import validate_email
 
 class RegisterAPIView(APIView):
     def post(self, request):
